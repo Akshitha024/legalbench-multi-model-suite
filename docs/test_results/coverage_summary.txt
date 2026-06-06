@@ -1,0 +1,27 @@
+...................                                                      [100%]
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.11.14-final-0 _______________
+
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+src/lbmm/__init__.py                    1      0   100%
+src/lbmm/cli/__init__.py                0      0   100%
+src/lbmm/cli/main.py                   44     44     0%
+src/lbmm/cost.py                       11      0   100%
+src/lbmm/judges/__init__.py             0      0   100%
+src/lbmm/judges/llm_judge.py           39     12    69%
+src/lbmm/leaderboard/__init__.py        0      0   100%
+src/lbmm/leaderboard/aggregate.py      30      4    87%
+src/lbmm/leaderboard/plots.py          43     43     0%
+src/lbmm/runner.py                     47     47     0%
+src/lbmm/runners/__init__.py            0      0   100%
+src/lbmm/runners/api_runners.py        48     48     0%
+src/lbmm/runners/base.py                8      1    88%
+src/lbmm/runners/local_hf.py           30     30     0%
+src/lbmm/runners/registry.py           24     24     0%
+src/lbmm/scoring.py                    45      5    89%
+src/lbmm/tasks/__init__.py              0      0   100%
+src/lbmm/tasks/loader.py               49     49     0%
+src/lbmm/types.py                      30      0   100%
+-------------------------------------------------------
+TOTAL                                 449    307    32%

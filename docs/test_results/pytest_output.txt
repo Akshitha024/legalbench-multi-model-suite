@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.14, pytest-9.0.3, pluggy-1.6.0
+rootdir: /Users/mani/Projects/akshitha-portfolio/projects/legalbench-multi-model
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0, anyio-4.13.0
+collected 19 items
+
+tests/test_aggregate.py ..                                               [ 10%]
+tests/test_cost.py ....                                                  [ 31%]
+tests/test_judge_parse.py .....                                          [ 57%]
+tests/test_scoring.py ........                                           [100%]
+
+============================== 19 passed in 0.79s ==============================
