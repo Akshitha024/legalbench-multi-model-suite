@@ -145,18 +145,18 @@ Charts in [`results/figures/`](./results/figures/):
 flowchart LR
     A[LegalBench HF dataset] -->|tasks/loader| B[TaskItem]
     B --> C{runner}
-    C -->|local_hf| D[Qwen2.5 / TinyLlama / ...]
-    C -->|api_runners| E[Anthropic / OpenAI / Google]
+    C -->|local_hf| D["Qwen2.5 / TinyLlama / ..."]
+    C -->|api_runners| E["Anthropic / OpenAI / Google"]
     D --> F[Prediction JSONL]
     E --> F
     F --> G[scoring.apply_scoring]
-    G --> H[runs/&lt;run&gt;/&lt;task&gt;.jsonl]
-    H --> I[leaderboard/aggregate]
+    G --> H["runs/&lt;run&gt;/&lt;task&gt;.jsonl"]
+    H --> I["leaderboard/aggregate"]
     I --> J[per_model.csv]
     I --> K[per_task.csv]
-    J --> L[plots/cost_vs_accuracy.png]
-    J --> M[plots/accuracy_by_model.png]
-    F -.free-form.-> N[judges/llm_judge]
+    J --> L["plots/cost_vs_accuracy.png"]
+    J --> M["plots/accuracy_by_model.png"]
+    F -.free-form.-> N["judges/llm_judge"]
     N --> G
 ```
 
