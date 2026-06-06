@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: lbmm (LegalBench multi-model harness)
+message: "If you use this harness, please cite as below and also cite Guha et al. 2023."
+authors:
+  - family-names: Lingampally
+    given-names: Akshitha Reddy
+type: software
+date-released: 2024-05-12
+repository-code: https://github.com/Akshitha024/legalbench-multi-model
+license: MIT
+references:
+  - type: article
+    title: "LegalBench: A Collaboratively Built Benchmark for Measuring Legal Reasoning in Large Language Models"
+    authors:
+      - family-names: Guha
+        given-names: Neel
+      - family-names: et al.
+    year: 2023
+    url: https://arxiv.org/abs/2308.11462

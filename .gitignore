@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+
+# eval artifacts that are big or live-generated
+runs/
+cache/
+*.parquet
+*.arrow
+
+# matplotlib images that are regenerated
+results/figures/*.svg
+
+# notebooks
+.ipynb_checkpoints/
+
+# editor
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# hf cache when set local
+.hf-cache/
