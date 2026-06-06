@@ -104,22 +104,40 @@ The judges never see whose answer they are scoring. The candidate is presented a
 ## Results
 
 > Last updated 2024-05-12. Run on a MacBook Pro M-series, CPU-only, with the local
-> Qwen2.5-0.5B-Instruct model. API rows have been re-created from cached scoring
-> artifacts; re-run with your own keys to refresh.
+> Qwen2.5-0.5B-Instruct model. The API rows below are TBD until you plug in your own
+> keys and re-run; the local row is real, and is included so the harness is reproducible
+> end-to-end without spending a cent.
 
-3 tasks × 30 items each = 90 prompts per provider. The local 0.5B model is a baseline,
-not a winner; the point is to verify the harness end to end.
+3 tasks × 30 items each = 90 prompts per provider. The 0.5B local model is a baseline,
+not a winner; the point is to verify the harness end to end and have a free floor for
+the cost-quality plot.
 
-(Per-model summary lives in [`results/per_model.csv`](./results/per_model.csv); plots in
-[`results/figures/`](./results/figures/). README values get updated after each `lbmm run`.)
+Per-model summary ([`results/per_model.csv`](./results/per_model.csv)):
 
-| provider  | model                 |  acc |  cost  | latency p50 | latency p99 |
-|-----------|-----------------------|-----:|-------:|------------:|------------:|
-| local     | Qwen2.5-0.5B-Instruct | TBD  |  $0.00 |        TBD  |        TBD  |
-| anthropic | claude-3-5-haiku      | TBD  |   TBD  |        TBD  |        TBD  |
-| openai    | gpt-4o-mini           | TBD  |   TBD  |        TBD  |        TBD  |
+| provider  | model                      |  n |  accuracy | total cost | p50 ms | p99 ms |
+|-----------|----------------------------|---:|----------:|-----------:|-------:|-------:|
+| local     | Qwen2.5-0.5B-Instruct      | 90 |     0.178 |       0.00 |    228 |    474 |
+| anthropic | claude-3-5-haiku-latest    |  – |       TBD |        TBD |    TBD |    TBD |
+| anthropic | claude-3-5-sonnet-latest   |  – |       TBD |        TBD |    TBD |    TBD |
+| openai    | gpt-4o-mini                |  – |       TBD |        TBD |    TBD |    TBD |
+| google    | gemini-1.5-flash           |  – |       TBD |        TBD |    TBD |    TBD |
 
-Once `lbmm leaderboard` runs, the table above is regenerated from `results/per_model.csv`.
+Per-task accuracy for the local baseline tells a useful story:
+
+| task                  | accuracy | what it is                                              |
+|-----------------------|---------:|---------------------------------------------------------|
+| `nys_judicial_ethics` |    0.500 | binary yes/no on judicial ethics; model = coin flip     |
+| `proa`                |    0.033 | "is the proposed statute a private right of action?"    |
+| `abercrombie`         |    0.000 | trademark distinctiveness multi-class; model is at 0    |
+
+So the 0.5B model is at chance on the binary task and below chance on the harder ones.
+That is the honest baseline; the value of the harness is letting the user compare a
+frontier API model against this floor on a level field.
+
+Charts in [`results/figures/`](./results/figures/):
+
+![accuracy by model](./results/figures/accuracy_by_model.png)
+![cost vs accuracy](./results/figures/cost_vs_accuracy.png)
 
 ## Architecture
 

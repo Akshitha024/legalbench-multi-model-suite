@@ -1,0 +1,2 @@
+provider,model,n,accuracy,total_cost_usd,total_prompt_tokens,total_completion_tokens,latency_p50_ms,latency_p99_ms,cost_per_correct_usd
+local,Qwen/Qwen2.5-0.5B-Instruct,90,0.17777777777777778,0,6714,245,227.99572901567444,473.63002147583757,0.0

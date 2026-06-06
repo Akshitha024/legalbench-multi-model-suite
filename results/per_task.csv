@@ -1,0 +1,4 @@
+task,provider,model,n,accuracy
+abercrombie,local,Qwen/Qwen2.5-0.5B-Instruct,30,0.0
+nys_judicial_ethics,local,Qwen/Qwen2.5-0.5B-Instruct,30,0.5
+proa,local,Qwen/Qwen2.5-0.5B-Instruct,30,0.03333333333333333
