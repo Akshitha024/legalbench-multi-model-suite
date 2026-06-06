@@ -35,3 +35,6 @@ results/figures/*.svg
 
 # hf cache when set local
 .hf-cache/
+
+# always track the rendered report PDF
+!docs/research_report.pdf
