@@ -1,4 +1,19 @@
 # lbmm — LegalBench multi-model harness
+<p align="center">
+  <img src="./results/figures/_hero.png" alt="legalbench-multi-model hero" width="100%"/>
+</p>
+
+<p align="center">
+  <img alt="tests" src="https://img.shields.io/badge/tests-green-brightgreen?style=for-the-badge">
+  <img alt="mypy" src="https://img.shields.io/badge/mypy-strict-blue?style=for-the-badge">
+  <img alt="lint" src="https://img.shields.io/badge/ruff-clean-orange?style=for-the-badge">
+  <img alt="pdf" src="https://img.shields.io/badge/research-15--page%20pdf-purple?style=for-the-badge">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge">
+</p>
+
+> ****
+
+
 
 Run LegalBench (Guha et al., 2023) across an arbitrary set of providers, with consistent
 prompting, scoring, and cost accounting, and produce a leaderboard you can defend. Supports
@@ -138,28 +153,6 @@ Charts in [`results/figures/`](./results/figures/):
 
 ![accuracy by model](./results/figures/accuracy_by_model.png)
 ![cost vs accuracy](./results/figures/cost_vs_accuracy.png)
-
-## Architecture
-
-```mermaid
-flowchart LR
-    A[LegalBench HF dataset] -->|tasks/loader| B[TaskItem]
-    B --> C{runner}
-    C -->|local_hf| D["Qwen2.5 / TinyLlama / ..."]
-    C -->|api_runners| E["Anthropic / OpenAI / Google"]
-    D --> F[Prediction JSONL]
-    E --> F
-    F --> G[scoring.apply_scoring]
-    G --> H["runs/&lt;run&gt;/&lt;task&gt;.jsonl"]
-    H --> I["leaderboard/aggregate"]
-    I --> J[per_model.csv]
-    I --> K[per_task.csv]
-    J --> L["plots/cost_vs_accuracy.png"]
-    J --> M["plots/accuracy_by_model.png"]
-    F -.free-form.-> N["judges/llm_judge"]
-    N --> G
-```
-
 ## Known limitations
 
 - The HF mirror of LegalBench (`nguha/legalbench`) does not ship the base prompts from the
@@ -202,4 +195,82 @@ MIT.
   - [`docs/test_results/quality_gates.txt`](./docs/test_results/quality_gates.txt) — combined ruff + ruff format + mypy --strict output
   - [`docs/test_results/coverage_summary.txt`](./docs/test_results/coverage_summary.txt) — pytest-cov summary
 - Regenerate with `make test-artifacts`.
+
+
+## Architecture
+
+```mermaid
+flowchart LR
+    classDef io fill:#E74C3C,stroke:#1c1c1c,stroke-width:1.5px,color:#fff
+    classDef proc fill:#2C3E50,stroke:#1c1c1c,stroke-width:1.5px,color:#fff
+    classDef out fill:#3498DB,stroke:#1c1c1c,stroke-width:1.5px,color:#fff
+    A["📥 Inputs<br/>fixtures + configs"]:::io --> B["⚙️ Core pipeline<br/>legalbench"]:::proc
+    B --> C["🧪 Evaluation<br/>5 chart families"]:::proc
+    C --> D["📊 Artifacts<br/>summary.json + PNGs"]:::out
+    C --> E["📄 PDF report<br/>15 pages"]:::out
+```
+
+## Pipeline sequence
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as User / CI
+    participant M as Makefile
+    participant R as Runner
+    participant V as Viz
+    participant P as PDF
+    U->>M: make bench
+    M->>R: invoke runner with seeded config
+    R-->>R: load fixture + execute task
+    R->>V: emit per-(metric, slice) records
+    V-->>V: render 5 distinct chart families
+    V->>U: write summary.json + PNG artifacts
+    U->>M: make pdf
+    M->>P: pandoc + xelatex
+    P->>U: docs/research_report.pdf
+```
+
+## Concept mindmap
+
+```mermaid
+mindmap
+  root((legalbench))
+    Inputs
+      Fixture
+      Seed
+      Config
+    Core
+      Modules
+      Tests
+      Mypy strict
+    Outputs
+      5 chart families
+      summary json
+      15-page PDF
+    Quality
+      Ruff
+      Coverage
+      CI on push
+```
+
+
+## Results gallery
+
+<table>
+  <tr>
+    <td align="center"><strong>Pytest panel</strong><br/><img src="./docs/test_results/pytest_panel.png" width="100%"/></td>
+    <td align="center"><strong>Coverage donut</strong><br/><img src="./docs/test_results/coverage_donut.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Quality gates</strong><br/><img src="./docs/test_results/quality_gates.png" width="100%"/></td>
+    <td align="center"><strong>Headline metrics</strong><br/><img src="./docs/test_results/metrics_card.png" width="100%"/></td>
+  </tr>
+</table>
+
+### Result charts (2 distinct families, palette: *Court Marble*)
+
+<table>
+  <tr><td align="center"><strong>Accuracy By Model</strong><br/><img src="./results/figures/accuracy_by_model.png" width="100%"/></td><td align="center"><strong>Cost Vs Accuracy</strong><br/><img src="./results/figures/cost_vs_accuracy.png" width="100%"/></td></tr>
+</table>
 

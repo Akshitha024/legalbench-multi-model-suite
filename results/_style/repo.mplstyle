@@ -1,0 +1,21 @@
+# Court Marble palette for this repo. Re-rendered charts pick this up.
+axes.facecolor: #ECF0F1
+figure.facecolor: #ECF0F1
+axes.edgecolor: #1c1c1c
+axes.labelcolor: #1c1c1c
+axes.titlecolor: #1c1c1c
+axes.titleweight: bold
+xtick.color: #1c1c1c
+ytick.color: #1c1c1c
+grid.color: #BDC3C7
+grid.alpha: 0.5
+axes.grid: True
+axes.spines.top: False
+axes.spines.right: False
+axes.prop_cycle: cycler('color', [#2C3E50, #E74C3C, #3498DB, #F39C12, #16A085, #9B59B6])
+font.family: sans-serif
+font.sans-serif: Helvetica, Arial, DejaVu Sans
+font.size: 10
+figure.titlesize: 14
+figure.titleweight: bold
+image.cmap: plasma
